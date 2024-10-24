@@ -1,6 +1,6 @@
 # Pancreatic cancer detection from images
 
-| Nr. | Autor(i) / An | Titlul articolului / proiectului | Aplicație / Domeniu¹ | Tehnologii utilizate² | Metodologie / Abordare³ | Rezultate⁴ | Limitări⁵ | Comentarii suplimentare⁶ |
+| Nr. | Autor(i) / An | Titlul articolului / proiectului | Aplicație / Domeniu | Tehnologii utilizate | Metodologie / Abordare | Rezultate | Limitări | Comentarii suplimentare |
 | --- | ------------- | ------------------------------- | --------------------- | ---------------------- | ----------------------- | ---------- | --------- | ------------------------ |
 | 1   |               |                                 |                       |                        |                         |            |           |                          |
 | 2   |               |                                 |                       |                        |                         |            |           |                          |
