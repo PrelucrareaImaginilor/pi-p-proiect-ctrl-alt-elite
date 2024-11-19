@@ -6,6 +6,9 @@ from torchvision import datasets, transforms
 #preprocseasare set de date
 IMG_SIZE = 128
 BATCH_SIZE = 32
+EPOCHS = 10
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
 transform = transforms.Compose([
     transforms.Resize((IMG_SIZE, IMG_SIZE)),
     transforms.ToTensor(),
@@ -44,3 +47,34 @@ class CNNModel(nn.Module):
         x = self.flatten(x)
         x = self.fc_layers(x)
         return x
+
+    def train_model(model, train_loader, val_loader, criterion, optimizer, epochs):
+        for epoch in range(epochs):
+            model.train()
+            running_loss = 0.0
+            for inputs, labels in train_loader:
+                inputs, labels = inputs.to(DEVICE), labels.float().to(DEVICE)
+
+                optimizer.zero_grad()
+                outputs = model(inputs).squeeze()
+                loss = criterion(outputs, labels)
+                loss.backward()
+                optimizer.step()
+                running_loss += loss.item()
+
+            model.eval()
+            val_loss = 0.0
+            correct = 0
+            total = 0
+            with torch.no_grad():
+                for inputs, labels in val_loader:
+                    inputs, labels = inputs.to(DEVICE), labels.float().to(DEVICE)
+                    outputs = model(inputs).squeeze()
+                    loss = criterion(outputs, labels)
+                    val_loss += loss.item()
+                    preds = (outputs > 0.5).float()
+                    correct += (preds == labels).sum().item()
+                    total += labels.size(0)
+
+            print(f"Epoch {epoch + 1}/{epochs}, Loss: {running_loss / len(train_loader):.4f}, "
+                  f"Val Loss: {val_loss / len(val_loader):.4f}, Accuracy: {correct / total:.4f}")
