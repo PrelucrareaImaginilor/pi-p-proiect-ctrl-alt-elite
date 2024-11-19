@@ -24,25 +24,25 @@ Proiectul este construit cu **PyTorch** și utilizează un model CNN simplu care
 
 ## Setul de date
 Asigură-te că ai imaginile CT structurate astfel:
-DATASET/
-├── train/
-│   ├── normal/
-│   │   ├── img1.jpg
-│   │   ├── img2.jpg
-│   │   └── ...
-│   └── pancreatic_tumor/
-│       ├── img1.jpg
-│       ├── img2.jpg
-│       └── ...
-└── test/
-    ├── normal/
-    │   ├── img1.jpg
-    │   ├── img2.jpg
-    │   └── ...
-    └── pancreatic_tumor/
-        ├── img1.jpg
-        ├── img2.jpg
-        └── ...
+DATASET/  
+├── train/  
+│   ├── normal/  
+│   │   ├── img1.jpg  
+│   │   ├── img2.jpg  
+│   │   └── ...  
+│   └── pancreatic_tumor/  
+│       ├── img1.jpg  
+│       ├── img2.jpg  
+│       └── ...  
+└── test/  
+    ├── normal/  
+    │   ├── img1.jpg  
+    │   ├── img2.jpg  
+    │   └── ...   
+    └── pancreatic_tumor/  
+        ├── img1.jpg  
+        ├── img2.jpg  
+        └── ...     
 ## Cerințe
 Asigură-te că ai instalat următoarele biblioteci:
 - Python 3.x
