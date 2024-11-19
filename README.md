@@ -53,3 +53,11 @@ Asigură-te că ai instalat următoarele biblioteci:
 Pentru a instala bibliotecile necesare, rulează:
 ```bash
 pip install torch torchvision pillow
+
+## Cum să rulezi proiectul
+
+### 1. Antrenarea modelului
+Pentru a antrena modelul, rulează `main.py`. Acesta va citi datele din directorul `DATASET/train`, va antrena modelul și va salva modelul antrenat în `pancreatic_cancer_model.pth`.
+
+```bash
+python main.py
