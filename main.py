@@ -81,11 +81,12 @@ def train_model(model, train_loader, val_loader, criterion, optimizer, epochs):
         print(f"Epoch {epoch + 1}/{epochs}, Loss: {running_loss / len(train_loader):.4f}, "
               f"Val Loss: {val_loss / len(val_loader):.4f}, Accuracy: {correct / total:.4f}")
 
-# initializare si antrenare model
-model = CNNModel().to(DEVICE)
-criterion = nn.BCELoss()
-optimizer = optim.Adam(model.parameters(), lr=0.001)
-
-# apelare functie de antrenare si salvare model
-train_model(model, train_loader, val_loader, criterion, optimizer, EPOCHS)
-torch.save(model.state_dict(), 'pancreatic_cancer_model.pth')
+#se executa doar cand rulam main.py
+if __name__ == "__main__":
+    # initializare si antrenare model
+    model = CNNModel().to(DEVICE)
+    criterion = nn.BCELoss()
+    optimizer = optim.Adam(model.parameters(), lr=0.001)
+    # apelare functie de antrenare si salvare model
+    train_model(model, train_loader, val_loader, criterion, optimizer, EPOCHS)
+    torch.save(model.state_dict(), 'pancreatic_cancer_model.pth')
