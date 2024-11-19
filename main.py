@@ -1,9 +1,10 @@
 import torch.nn as nn
 import torch
+from torch import optim
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 
-#preprocseasare set de date si setari generale
+# setari generale si preprocesarea setului de date
 IMG_SIZE = 128
 BATCH_SIZE = 32
 EPOCHS = 10
@@ -15,13 +16,13 @@ transform = transforms.Compose([
     transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
 ])
 
-train_dataset = datasets.ImageFolder(root='DATASET/test', transform=transform)
-val_dataset = datasets.ImageFolder(root='DATASET/train', transform=transform)
+train_dataset = datasets.ImageFolder(root='DATASET/train', transform=transform)
+val_dataset = datasets.ImageFolder(root='DATASET/test', transform=transform)
 
 train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True)
 val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False)
 
-#arhitectura cnn
+# arhitectura cnn
 class CNNModel(nn.Module):
     def __init__(self):
         super(CNNModel, self).__init__()
@@ -47,39 +48,44 @@ class CNNModel(nn.Module):
         x = self.flatten(x)
         x = self.fc_layers(x)
         return x
-#functia de antrenare
-    def train_model(model, train_loader, val_loader, criterion, optimizer, epochs):
-        for epoch in range(epochs):
-            model.train()
-            running_loss = 0.0
-            for inputs, labels in train_loader:
+
+# functia de antrenare
+def train_model(model, train_loader, val_loader, criterion, optimizer, epochs):
+    for epoch in range(epochs):
+        model.train()
+        running_loss = 0.0
+        for inputs, labels in train_loader:
+            inputs, labels = inputs.to(DEVICE), labels.float().to(DEVICE)
+            optimizer.zero_grad()
+            outputs = model(inputs).squeeze()
+            loss = criterion(outputs, labels)
+            loss.backward()
+            optimizer.step()
+            running_loss += loss.item()
+
+        # validare rezultate
+        model.eval()
+        val_loss = 0.0
+        correct = 0
+        total = 0
+        with torch.no_grad():
+            for inputs, labels in val_loader:
                 inputs, labels = inputs.to(DEVICE), labels.float().to(DEVICE)
-                optimizer.zero_grad()
                 outputs = model(inputs).squeeze()
                 loss = criterion(outputs, labels)
-                loss.backward()
-                optimizer.step()
-                running_loss += loss.item()
+                val_loss += loss.item()
+                preds = (outputs > 0.5).float()
+                correct += (preds == labels).sum().item()
+                total += labels.size(0)
 
-            #validare rezultate
-            model.eval()
-            val_loss = 0.0
-            correct = 0
-            total = 0
-            with torch.no_grad():
-                for inputs, labels in val_loader:
-                    inputs, labels = inputs.to(DEVICE), labels.float().to(DEVICE)
-                    outputs = model(inputs).squeeze()
-                    loss = criterion(outputs, labels)
-                    val_loss += loss.item()
-                    preds = (outputs > 0.5).float()
-                    correct += (preds == labels).sum().item()
-                    total += labels.size(0)
+        print(f"Epoch {epoch + 1}/{epochs}, Loss: {running_loss / len(train_loader):.4f}, "
+              f"Val Loss: {val_loss / len(val_loader):.4f}, Accuracy: {correct / total:.4f}")
 
-            print(f"Epoch {epoch + 1}/{epochs}, Loss: {running_loss / len(train_loader):.4f}, "
-                  f"Val Loss: {val_loss / len(val_loader):.4f}, Accuracy: {correct / total:.4f}")
-            # Rulează antrenarea
-            model.train_model(model, train_loader, val_loader, criterion, optimizer, EPOCHS)
+# initializare si antrenare model
+model = CNNModel().to(DEVICE)
+criterion = nn.BCELoss()
+optimizer = optim.Adam(model.parameters(), lr=0.001)
 
-            # Salvarea modelului
-            torch.save(model.state_dict(), 'pancreatic_cancer_model.pth')
+# apelare functie de antrenare si salvare model
+train_model(model, train_loader, val_loader, criterion, optimizer, EPOCHS)
+torch.save(model.state_dict(), 'pancreatic_cancer_model.pth')
