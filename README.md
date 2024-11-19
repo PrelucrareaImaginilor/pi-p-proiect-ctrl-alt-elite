@@ -53,6 +53,7 @@ Asigură-te că ai instalat următoarele biblioteci:
 Pentru a instala bibliotecile necesare, rulează:
 ```bash
 pip install torch torchvision pillow
+```
 
 ## Cum să rulezi proiectul
 
@@ -61,3 +62,67 @@ Pentru a antrena modelul, rulează `main.py`. Acesta va citi datele din director
 
 ```bash
 python main.py
+```
+
+## 2. Testarea modelului pe o imagine nouă
+
+Pentru a testa modelul pe o imagine nouă, asigură-te că `pancreatic_cancer_model.pth` este generat (după antrenare) și rulează `testare.py`. Modifică calea imaginii în funcția `predict_image` din `testare.py` pentru a specifica imaginea pe care vrei să o testezi.
+
+### Exemplu:
+```python
+predict_image("DATASET/test/normal/1-081.jpg")
+```
+Apoi rulează:
+```bash
+python testare.py
+```
+
+Exemplu de output:
+```
+Prediction: Normal, Confidence: 0.85
+```
+
+## Structura Codului
+
+### `main.py`
+
+- **`CNNModel`**: Definiția modelului CNN, care conține straturi convoluționale și complet conectate.
+- **`train_model`**: Funcția care antrenează modelul pe setul de date și afișează pierderea și acuratețea la fiecare epocă.
+- **Salvarea modelului**: Modelul este salvat în `pancreatic_cancer_model.pth` după antrenare.
+
+### `testare.py`
+
+- Încarcă modelul salvat și aplică transformările necesare pentru imaginea de test.
+- **`predict_image`**: Funcția care preprocesează imaginea, face o predicție și afișează rezultatul și nivelul de încredere (confidence).
+
+## Metodologie
+
+- **Preprocesare**: Imaginile sunt redimensionate la 128x128, transformate în tensori și normalizate.
+- **Antrenare CNN**: Folosește un model CNN cu două straturi convoluționale și două straturi complet conectate. Funcția de activare finală este Sigmoid pentru a permite clasificarea binară.
+- **Inferență**: Modelul prelucrează o imagine de test și estimează probabilitatea de a fi normală sau de a avea o tumoare.
+
+## Rezultate și Limitări
+
+### Rezultate
+
+Modelul poate să facă o clasificare binară între imagini normale și cele cu tumori pancreatice. Performanța va depinde de calitatea și cantitatea setului de date de antrenament.
+
+### Limitări
+
+- Acest model simplu CNN poate să nu fie optim pentru detectarea precisă a cancerului pancreatic, mai ales în cazuri complexe.
+- Pentru îmbunătățirea performanței, se pot utiliza arhitecturi CNN mai avansate.
+- Necesită un set de date echilibrat și etichetat corect pentru a funcționa eficient.
+
+## Bibliografie
+
+1. **Arshiya S. Ansari et al. / 2022** - *Detection of Pancreatic Cancer in CT Scan Images Using PSO SVM and Image Processing*
+2. **Po-Ting Chen et al. / 2022** - *Pancreatic Cancer Detection on CT Scans with Deep Learning: A Nationwide Population-based Study*
+3. **Anish Gupta et al. / 2022** - *Pancreatic Cancer Detection using Machine and Deep Learning Techniques*
+4. **Kaushik Sekaran et al. / 2020** - *Deep learning convolutional neural network (CNN) With Gaussian mixture model for predicting pancreatic cancer*
+5. **Kai Cao et al. / 2023** - *Large-scale pancreatic cancer detection via non-contrast CT and deep learning*
+6. **[Sursa imagini - Kaggle ](https://www.kaggle.com/datasets/jayaprakashpondy/pancreatic-ct-images?resource=download)**
+7. **[Informatii CNN](https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html)**
+
+## Concluzie
+
+Acest proiect demonstrează utilizarea unui CNN simplu pentru detecția cancerului pancreatic în imagini CT. Pentru rezultate mai bune în aplicații clinice, se recomandă folosirea unor modele avansate și antrenarea pe seturi de date mari și diversificate.
