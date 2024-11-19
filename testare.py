@@ -11,10 +11,12 @@ model.to(DEVICE)
 model.eval()
 
 transform = transforms.Compose([
+    transforms.Lambda(lambda img: img.convert('RGB')),
     transforms.Resize((128, 128)),
     transforms.ToTensor(),
     transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
 ])
+
 
 def predict_image(image_path):
     image = Image.open(image_path)
