@@ -3,7 +3,7 @@ import torch
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 
-#preprocseasare set de date
+#preprocseasare set de date si setari generale
 IMG_SIZE = 128
 BATCH_SIZE = 32
 EPOCHS = 10
@@ -47,14 +47,13 @@ class CNNModel(nn.Module):
         x = self.flatten(x)
         x = self.fc_layers(x)
         return x
-
+#functia de antrenare
     def train_model(model, train_loader, val_loader, criterion, optimizer, epochs):
         for epoch in range(epochs):
             model.train()
             running_loss = 0.0
             for inputs, labels in train_loader:
                 inputs, labels = inputs.to(DEVICE), labels.float().to(DEVICE)
-
                 optimizer.zero_grad()
                 outputs = model(inputs).squeeze()
                 loss = criterion(outputs, labels)
@@ -62,6 +61,7 @@ class CNNModel(nn.Module):
                 optimizer.step()
                 running_loss += loss.item()
 
+            #validare rezultate
             model.eval()
             val_loss = 0.0
             correct = 0
@@ -78,3 +78,8 @@ class CNNModel(nn.Module):
 
             print(f"Epoch {epoch + 1}/{epochs}, Loss: {running_loss / len(train_loader):.4f}, "
                   f"Val Loss: {val_loss / len(val_loader):.4f}, Accuracy: {correct / total:.4f}")
+            # Rulează antrenarea
+            model.train_model(model, train_loader, val_loader, criterion, optimizer, EPOCHS)
+
+            # Salvarea modelului
+            torch.save(model.state_dict(), 'pancreatic_cancer_model.pth')
