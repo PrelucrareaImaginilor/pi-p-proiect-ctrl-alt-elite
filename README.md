@@ -121,8 +121,8 @@ Modelul poate să facă o clasificare binară între imagini normale și cele cu
 4. **Kaushik Sekaran et al. / 2020** - *Deep learning convolutional neural network (CNN) With Gaussian mixture model for predicting pancreatic cancer*
 5. **Kai Cao et al. / 2023** - *Large-scale pancreatic cancer detection via non-contrast CT and deep learning*
 6. **[Sursa imagini - Kaggle ](https://www.kaggle.com/datasets/jayaprakashpondy/pancreatic-ct-images?resource=download)**
-7. **[Informatii CNN](https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html)**
-
+7. **[Informatii CNN - PyTorch](https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html)**
+8. **[Simple Convolutional Neural Network (CNN) for Dummies in PyTorch: A Step-by-Step Guide](https://medium.com/@myringoleMLGOD/simple-convolutional-neural-network-cnn-for-dummies-in-pytorch-a-step-by-step-guide-6f4109f6df80)**
 ## Concluzie
 
 Acest proiect demonstrează utilizarea unui CNN simplu pentru detecția cancerului pancreatic în imagini CT. Pentru rezultate mai bune în aplicații clinice, se recomandă folosirea unor modele avansate și antrenarea pe seturi de date mari și diversificate.
