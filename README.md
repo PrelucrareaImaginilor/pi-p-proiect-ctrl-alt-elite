@@ -7,3 +7,21 @@
 | 3   |Anish Gupta; Apeksha Koul; Yogesh Kumar / 2022|Pancreatic Cancer Detection using Machine and Deep Learning Techniques|Medical|Machine and Deep Learning|Cercetările aplică tehnici de machine learning și deep learning pentru diagnosticarea cancerului pancreatic, folosind analize radiomice, date EHR și scanări CT pentru detectarea precoce și prognoza evoluției bolii. Se folosesc algoritmi precum XGBoost, regresie logistică și rețele neuronale, evaluând modele de clasificare și predicție a riscurilor. Aceste metode pot sprijini deciziile clinice și identificarea biomarkerilor.|94%|           |                          |
 | 4   |Kaushik Sekaran, P. Chandana & N. Murali Krishna, Seifedine Kadry / 2020|Deep learning convolutional neural network (CNN) With Gaussian mixture model for predicting pancreatic cancer|Medical|Convolutional Neural Network (CNN)Gaussian Mixture Model (GMM)EM Algorithm (Expectation-Maximization)|Metodologia implică utilizarea unui model Gaussian Mixture (GMM) pentru a clasifica datele din imagini CT ale pancreasului, optimizat prin algoritmul EM pentru ajustarea ponderilor și parametrilor componentelor. Pentru detectarea automată a tumorilor, se aplică un Convolutional Neural Network (CNN) cu multiple straturi ascunse, care învață caracteristicile relevante direct din imagini, fără extracție manuală de caracteristici. Această abordare combină analiza statistică și deep learning pentru diagnosticarea eficientă a cancerului pancreatic.|            |           |                          |
 | 5   |Kai Cao, Yingda Xia, Jiawen Yao, Xu Han, Lukas Lambert, Tingting Zhang, Wei Tang, Gang Jin, Hui Jiang, Xu Fang, Isabella Nogues, Xuezhou Li, Wenchao Guo, Yu Wang, Wei Fang, Mingyan Qiu, Yang Hou, Tomas Kovarnik, Michal Vocka, Yimei Lu, Yingli Chen, Xin Chen, Zaiyi Liu, Jian Zhou,Jianping Lu / 2023|Large-scale pancreatic cancer detection via non-contrast CT and deep learning|Medical|PANDA, un model AI cu deep learning|Ei au dezvoltat un model AI care a fost antrenat prin supervised machine learning, folosind imaginile CT cu si fara contrast, au dezvoltat un algoritm de segmentare precisa a tumorilor chiar si in absenta contrastului|PANDA a atins o sensibilitate de 95.5% și o specificitate de 99.8%|Sensibilitate redusă pentru leziuni mici sau atipice, posibile rezultate fals-pozitive, fiind nevoie de o validare umană|                          |
+
+
+## Descriere
+Acest proiect folosește o rețea neuronală convoluțională (CNN) pentru a detecta cancerul pancreatic din imagini CT. Scopul este de a clasifica imaginile în două categorii:
+- **Normal**: pancreas fără tumori
+- **Pancreatic Tumor**: pancreas cu prezența unei tumori
+
+Proiectul este construit cu **PyTorch** și utilizează un model CNN simplu care poate fi antrenat și testat pe un set de imagini structurat corespunzător.
+
+## Structura proiectului
+- **main.py**: Codul pentru definirea, antrenarea și salvarea modelului CNN.
+- **testare.py**: Script pentru încărcarea modelului salvat și testarea acestuia pe noi imagini.
+- **DATASET**: Directorul care conține setul de date organizat în directoare `train` și `test`, fiecare având subdirectoare pentru clasele `normal` și `pancreatic_tumor`.
+- **pancreatic_cancer_model.pth**: Fișierul modelului antrenat (va fi generat după rularea `main.py`).
+
+## Setul de date
+Asigură-te că ai imaginile CT structurate astfel:
+DATASET/ ├── train/ │ ├── normal/ │ │ ├── img1.jpg │ │ ├── img2.jpg │ │ └── ... │ └── pancreatic_tumor/ │ ├── img1.jpg │ ├── img2.jpg │ └── ... └── test/ ├── normal/ │ ├── img1.jpg │ ├── img2.jpg │ └── ... └── pancreatic_tumor/ ├── img1.jpg ├── img2.jpg └── ...
