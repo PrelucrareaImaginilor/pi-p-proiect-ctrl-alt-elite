@@ -1,0 +1,38 @@
+Model original
+normale:
+
+1-043 - Prediction: Normal, Confidence: 0.9990
+1-087 - Prediction: Normal, Confidence: 0.9982
+1-098 - Prediction: Normal, Confidence: 0.9983
+1-102 - Prediction: Normal, Confidence: 0.9989
+1-127 - Prediction: Normal, Confidence: 0.9846
+1-148 - Prediction: Normal, Confidence: 0.9951
+1-214 - Prediction: Normal, Confidence: 0.9669
+1-218 - Prediction: Normal, Confidence: 0.9559
+
+pancreatic:
+
+1-015 - Prediction: Pancreatic Tumor, Confidence: 1.0000
+1-028 - Prediction: Pancreatic Tumor, Confidence: 1.0000
+1-055 - Prediction: Pancreatic Tumor, Confidence: 1.0000
+1-058 - Prediction: Pancreatic Tumor, Confidence: 1.0000
+1-078 - Prediction: Pancreatic Tumor, Confidence: 1.0000
+1-138 - Prediction: Pancreatic Tumor, Confidence: 1.0000
+1-158 - Prediction: Pancreatic Tumor, Confidence: 1.0000
+1-171 - Prediction: Pancreatic Tumor, Confidence: 1.0000
+1-191 - Prediction: Pancreatic Tumor, Confidence: 1.0000
+
+
+model cu numarul de generatii crescut de la 10 la 25 si cu imagini noi integrate in setul precedent
+
+case_10/slice_138 - Prediction: Normal, Confidence: 0.9995
+case_10/slice_160 - Prediction: Normal, Confidence: 0.9858
+case_10/slice_168 - Prediction: Normal, Confidence: 0.9803
+case_10/slice_152 - Prediction: Normal, Confidence: 0.9992
+case_18/slice_075 - Prediction: Normal, Confidence: 0.9067
+case_18/slice_070 - Prediction: Normal, Confidence: 0.9885
+case_18/slice_086 - Prediction: Normal, Confidence: 0.8115
+case_175/slice_015 - Prediction: Normal, Confidence: 0.9976
+case_175/slice_045 - Prediction: Normal, Confidence: 0.9955
+case_175/slice_074 - Prediction: Normal, Confidence: 0.9932
+

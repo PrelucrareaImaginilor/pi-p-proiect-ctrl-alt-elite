@@ -7,7 +7,7 @@ from torchvision import datasets, transforms
 # setari generale si preprocesarea setului de date
 IMG_SIZE = 128
 BATCH_SIZE = 32
-EPOCHS = 10
+EPOCHS = 25
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 transform = transforms.Compose([
