@@ -30,5 +30,5 @@ def predict_image(image_path):
         print(im.group(0) + " - " + f"Prediction: {prediction}, Confidence: {confidence:.4f}")
 
 
-for i in range(40, 220):
+for i in range(190, 220):
     predict_image("DATASET/train/normal/1-"+str(f"{i:03}")+".jpg")
